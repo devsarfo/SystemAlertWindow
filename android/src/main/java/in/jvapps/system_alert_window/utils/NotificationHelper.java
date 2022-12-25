@@ -133,9 +133,7 @@ public class NotificationHelper {
         bubbleIntent.setAction(Intent.ACTION_VIEW);
         bubbleIntent.putExtra(INTENT_EXTRA_PARAMS_MAP, params);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent = PendingIntent.getActivity(mContext.get(), REQUEST_BUBBLE, bubbleIntent,
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? (PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE)
-                : PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext.get(), REQUEST_BUBBLE, bubbleIntent, Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? (PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE) : PendingIntent.FLAG_UPDATE_CURRENT);
         long now = currentTimeMillis() - 100;
         @SuppressLint("UnspecifiedImmutableFlag")
         Notification.Builder builder = new Notification.Builder(mContext.get(), CHANNEL_ID)
@@ -147,9 +145,7 @@ public class NotificationHelper {
                 .setLocusId(new LocusId(BUBBLE_SHORTCUT_ID))
                 .addPerson(person)
                 .setShowWhen(true)
-                .setContentIntent(PendingIntent.getActivity(mContext.get(), REQUEST_CONTENT, bubbleIntent,
-                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? (PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE)
-                                : PendingIntent.FLAG_UPDATE_CURRENT))
+                .setContentIntent(PendingIntent.getActivity(mContext.get(), REQUEST_CONTENT, bubbleIntent, Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? (PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE) : PendingIntent.FLAG_UPDATE_CURRENT)
                 .setStyle(new Notification.MessagingStyle(user)
                         .addMessage(new Notification.MessagingStyle.Message(notificationBody, now, person))
                         .setGroupConversation(false))
